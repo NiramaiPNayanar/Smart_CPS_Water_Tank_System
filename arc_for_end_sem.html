@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Water Level Gauge</title>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.60/build/spline-viewer.js"></script>
+ 
+  <style>
+html, body { overflow: hidden; }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #121212;
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+nav {
+  width: 100%;
+  background: #1e1e1e;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-weight: 500;
+}
+nav a {
+  text-decoration: none;
+  color: #64b5f6;
+  transition: color 0.3s ease;
+}
+nav a:hover { color: #90caf9; }
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10rem;
+  margin-top: 3rem;
+  width: 90%;
+  max-width: 1200px;
+}
+.graph-container {
+  flex: 1;
+  background: #1c1c1c;
+  border-radius: 16px;
+  padding: 2rem;
+  padding-top: 5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4),0 6px 20px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.graph-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5),0 8px 30px rgba(66,165,245,0.3),0 12px 24px rgba(0,0,0,0.7);
+}
+.graph-title { font-size: 2.4rem; font-weight: 600; color: #90caf9; margin-bottom: 1rem; }
+canvas { display: block; }
+#counter {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #64b5f6;
+  text-shadow: 0px 0px 10px rgba(100,181,246,0.7);
+}
+#modeButton {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #64b5f6;
+  color: #121212;
+  transition: all 0.3s ease;
+}
+#modeButton.manual { background: #ff9800; color: #121212; }
+.prediction {
+  padding-top: 1rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #e0e0e0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.prediction span { font-weight: 600; color: #64b5f6; }
+#spline-container { flex: 1; height: 650px; width: 100px; }
+spline-viewer { width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Activity</a>
+    <a href="#">User</a>
+  </nav>
+
+  <div class="main-container">
+    <div class="graph-container">
+      <div class="graph-title">Water Level</div>
+      <canvas id="gaugeCanvas" width="320" height="200"></canvas>
+      <div id="counter">0</div>
+
+      <button id="modeButton">Auto Mode</button>
+
+      <div class="prediction">
+        Predicted Time Till Full: <span id="timeLeft">40s</span>
+      </div>
+    </div>
+
+    <div id="spline-container">
+      <spline-viewer url="https://prod.spline.design/x2QEkErusMzyF90k/scene.splinecode"></spline-viewer>
+    </div>
+  </div>
+
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<script>
+const canvas = document.getElementById("gaugeCanvas");
+const ctx = canvas.getContext("2d");
+const counter = document.getElementById("counter");
+const timeLeftEl = document.getElementById("timeLeft");
+const modeButton = document.getElementById("modeButton");
+
+// MQTT Setup
+const host = "192.168.90.20";
+const port = 8083;
+const topic = "esp32/ultrasonic";
+const hc12Topic = "esp32/hc12";
+
+const clientId = "webclient_" + Math.random().toString(16).substr(2, 6);
+const url = `ws://${host}:${port}`;
+const client = mqtt.connect(url, { clientId, keepalive:30, reconnectPeriod:2000 });
+
+client.on("connect", () => { 
+  console.log("MQTT connected");
+  client.subscribe(topic);
+  client.subscribe(hc12Topic);
+});
+client.on("close", () => console.log("MQTT disconnected"));
+client.on("error", err => console.error("MQTT error:", err));
+
+const waterData = [];
+let leakingStartTime = null;
+let lastLevel = null;
+let autoMode = false;
+let lastPositiveTime = 0;
+
+// Linear regression helper
+function linearRegression(data) {
+  const n = data.length;
+  if (n < 2) return null;
+  let sumX=0,sumY=0,sumXY=0,sumXX=0;
+  data.forEach(d => { sumX+=d.time; sumY+=d.level; sumXY+=d.time*d.level; sumXX+=d.time*d.time; });
+  const slope = (n*sumXY - sumX*sumY)/(n*sumXX - sumX*sumX);
+  return { slope };
+}
+
+// Draw gauge
+function drawGauge(value) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height - 20;
+  const radius = 100;
+
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius, Math.PI, 2*Math.PI);
+  ctx.strokeStyle="#333"; ctx.lineWidth=12; ctx.stroke();
+
+  const gradient = ctx.createLinearGradient(centerX-radius, centerY, centerX+radius, centerY);
+  gradient.addColorStop(0,"#42a5f5");
+  gradient.addColorStop(1,"#90caf9");
+  const endAngle = Math.PI + (value/80)*Math.PI;
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius, Math.PI, endAngle);
+  ctx.strokeStyle=gradient;
+  ctx.lineWidth=12;
+  ctx.lineCap="round";
+  ctx.stroke();
+
+  ctx.fillStyle="#e0e0e0";
+  ctx.font="14px Poppins";
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+  ctx.fillText("0", centerX-radius+20, centerY-10);
+  ctx.fillText("40", centerX, centerY-radius+20);
+  ctx.fillText("80", centerX+radius-20, centerY-10);
+}
+
+// Handle incoming MQTT messages
+client.on("message", (t,p)=>{
+  const txt = p.toString();
+  if(t===hc12Topic){ console.log("HC-12 Message:",txt); return; }
+
+  try{
+    const obj = JSON.parse(txt);
+    if(typeof obj.distance==="number"){
+      let distance = obj.distance;
+      if(distance>80) distance=80;
+      if(distance<0) distance=0;
+
+      // Actual water level
+      const waterLevel = 80 - distance;
+      counter.innerText=Math.floor(waterLevel);
+      drawGauge(waterLevel);
+
+      // Store for regression
+      const now=Date.now()/1000;
+      waterData.push({time:now,level:waterLevel});
+      if(waterData.length>20) waterData.shift();
+
+      const lr = linearRegression(waterData);
+
+      if(lr){
+        const slope=lr.slope;
+
+        // Leaking if water level < 15 and decreasing
+        if(waterLevel<15 && lastLevel!==null && waterLevel<lastLevel){
+          if(!leakingStartTime) leakingStartTime=now;
+          const elapsed=now-leakingStartTime;
+          if(elapsed<3){
+            timeLeftEl.textContent="Checking…";
+          } else {
+            timeLeftEl.textContent="Leaking!";
+          }
+        } else {
+          leakingStartTime=null;
+
+          // Prediction
+          const timeToFullSec=(80-waterLevel)/(slope||0.001);
+          let timeToShowSec=timeToFullSec>0?timeToFullSec:lastPositiveTime;
+          lastPositiveTime=timeToShowSec;
+          const timeToFullMin=timeToShowSec/60;
+
+          if(timeToFullMin<150){
+            timeLeftEl.textContent=`${timeToFullMin.toFixed(1)} min`;
+          } else {
+            const hours=Math.floor(timeToFullMin/60);
+            const minutes=Math.round(timeToFullMin%60);
+            timeLeftEl.textContent=`${hours}:${minutes<10?"0"+minutes:minutes} hrs`;
+          }
+        }
+        lastLevel=waterLevel;
+      }
+    }
+  }catch(e){console.error("Parsing error:",e);}
+});
+
+// Auto Mode toggle
+modeButton.addEventListener("click",()=>{
+  autoMode=!autoMode;
+  if(autoMode){
+    modeButton.classList.add("manual");
+    modeButton.textContent="Manual Mode";
+    client.publish(hc12Topic,"1");
+    console.log("Auto Mode ON -> Sent 1 to HC-12");
+  }else{
+    modeButton.classList.remove("manual");
+    modeButton.textContent="Auto Mode";
+    console.log("Auto Mode OFF");
+  }
+});
+</script>
+
+</body>
+</html>
