@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Water Activity</title>
+  <style>
+    /* Page basics */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000; /* Black background by default */
+      overflow: hidden;
+       font-family: 'Poppins', sans-serif;
+    }
+
+    /* Spline background */
+    spline-viewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 110%;
+      background: #000;
+      pointer-events: none;
+      z-index: 0; /* keep behind content */
+    }
+
+    body { position: relative }
+
+    /* Navbar */
+    .navbar {
+      display:flex;
+      justify-content:center;
+      background:#1e1e1e;
+      padding:14px 0;
+      box-shadow:0 2px 6px rgba(0,0,0,0.5);
+      position:sticky;
+      top:0;
+      z-index: 10;
+    }
+    .navbar a {
+      color:#64b5f6;
+      text-decoration:none;
+      margin:0 18px;
+      font-weight:500;
+      transition:color 0.3s, border-bottom 0.3s;
+      padding-bottom:4px;
+    }
+    .navbar a:hover { color:#90caf9 }
+    .navbar a.active {
+      border-bottom:3px solid #64b5f6;
+      color:#90caf9;
+    }
+
+    /* Main layout and overlay-style graph container */
+    .main-container {
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      margin-top:3rem;
+      width:90%;
+      max-width:1200px;
+      margin-left:auto;
+      margin-right:auto;
+      position: relative;
+      z-index: 5; /* above spline */
+    }
+    .graph-container {
+      flex:1;
+      background:#1c1c1c;
+      border-radius:16px;
+      padding:2rem;
+      padding-top:5rem;
+      box-shadow:0 2px 4px rgba(0,0,0,0.4),0 6px 20px rgba(0,0,0,0.6);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      position:relative;
+      transition:transform 0.25s ease,box-shadow 0.25s ease;
+    }
+    .graph-container:hover {
+      transform:translateY(-5px);
+      box-shadow:0 4px 8px rgba(0,0,0,0.5),
+                 0 8px 30px rgba(66,165,245,0.3),
+                 0 12px 24px rgba(0,0,0,0.7);
+    }
+
+    .chart-container { position:relative;height:420px;width:100% }
+    h2 {
+      margin-top: 2px;
+     
+      font-family:system-ui,Segoe UI,Roboto,Arial;
+      color:#64b5f6;
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Spline background -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.61/build/spline-viewer.js"></script>
+  <spline-viewer url="https://prod.spline.design/z8GxybXBhb4Ia2Ts/scene.splinecode"></spline-viewer>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="./main.html">Home</a>
+    <a href="#" class="active">Activity</a>
+    <a href="#">User</a>
+  </nav>
+
+  <!-- Main content -->
+  <div class="main-container">
+    <div class="graph-container" role="region" aria-label="7-line time graph">
+      <h2>Water Activity</h2>
+      <div class="chart-container">
+        <canvas id="timeChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Chart creation (static, randomized at first load) -->
+  <script>
+    function generateLabels(points){
+      const labels = [];
+      for(let i=0;i<points;i++){
+        const frac = i/(points-1);
+        const totalMinutes = Math.round(frac * (24*60 - 1));
+        const h = Math.floor(totalMinutes/60);
+        const m = totalMinutes%60;
+        const ampm = h < 12 ? 'AM' : 'PM';
+        const hh = (h % 12) === 0 ? 12 : (h%12);
+        const mm = String(m).padStart(2,'0');
+        labels.push(`${hh}:${mm} ${ampm}`);
+      }
+      return labels;
+    }
+
+    function randPoints(n){
+      return Array.from({length:n},()=>Math.round(Math.random()*80));
+    }
+
+    const dayNames = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    const palette = [
+      'rgba(255,99,132,0.9)',
+      'rgba(54,162,235,0.9)',
+      'rgba(255,206,86,0.9)',
+      'rgba(75,192,192,0.9)',
+      'rgba(153,102,255,0.9)',
+      'rgba(255,159,64,0.9)',
+      'rgba(99,255,132,0.9)'
+    ];
+
+    function createChart(){
+      const canvas = document.getElementById('timeChart');
+      if(!canvas) return console.error('Canvas not found');
+      const ctx = canvas.getContext('2d');
+
+      const POINTS = 24;
+      const labels = generateLabels(POINTS);
+
+      const datasets = dayNames.map((day,i)=>({
+        label: day,
+        data: randPoints(POINTS),
+        borderWidth: 2,
+        tension: 0.35,
+        pointRadius: 2,
+        spanGaps: true,
+        fill: false,
+        borderColor: palette[i],
+        backgroundColor: palette[i].replace('0.9','0.15')
+      }));
+
+      new Chart(ctx, {
+        type: 'line',
+        data: { labels, datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: false,
+          plugins: { legend: { position: 'top', labels: { color: '#ffffff' } } },
+          scales: {
+            x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 12, color: '#ffffff' } },
+            y: { min: 0, max: 80, ticks: { stepSize: 10, color: '#ffffff' } }
+          },
+          layout: { padding: 6 }
+        }
+      });
+
+      canvas.style.background = 'transparent';
+    }
+
+    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', createChart);
+    else createChart();
+  </script>
+</body>
+</html>
