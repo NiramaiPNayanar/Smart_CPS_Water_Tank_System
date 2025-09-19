@@ -1,0 +1,28 @@
+{
+  "name": "smart_cps_water_tank_system",
+  "version": "1.0.0",
+  "description": "This is my IOT end sem project which I made into a CPS system using ML and other factors. I'll keep updating this so stay tuned !!!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NiramaiPNayanar/Smart_CPS_Water_Tank_System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NiramaiPNayanar/Smart_CPS_Water_Tank_System/issues"
+  },
+  "homepage": "https://github.com/NiramaiPNayanar/Smart_CPS_Water_Tank_System#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.18.1"
+  }
+}

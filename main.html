@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Water Level Gauge</title>
   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.60/build/spline-viewer.js"></script>
- 
+   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
 html, body { overflow: hidden; }
 body {
@@ -108,14 +108,15 @@ spline-viewer { width: 100%; height: 100%; }
   </style>
 </head>
 <body>
-<nav class="navbar">
+<nav class="navbar" data-aos="fade-down"
+     data-aos-anchor-placement="center-center">
     <a href="./main.html" class="active">Home</a>
     <a href="./Activity.html" >Activity</a>
-    <a href="#">User</a>
+    <a href="./User.html">User</a>
   </nav>
 
-  <div class="main-container">
-    <div class="graph-container">
+  <div class="main-container" >
+    <div class="graph-container" >
       <div class="graph-title">Water Level</div>
       <canvas id="gaugeCanvas" width="320" height="200"></canvas>
       <div id="counter">0</div>
@@ -204,6 +205,7 @@ function drawGauge(value) {
   ctx.fillText("40", centerX, centerY-radius+20);
   ctx.fillText("80", centerX+radius-20, centerY-10);
 }
+let lastSent = 0; 
 
 // Handle incoming MQTT messages
 client.on("message", (t,p)=>{
@@ -217,11 +219,31 @@ client.on("message", (t,p)=>{
       if(distance>80) distance=80;
       if(distance<0) distance=0;
 
-      // Actual water level
       const waterLevel = 80 - distance;
-      counter.innerText=Math.floor(waterLevel);
-      drawGauge(waterLevel);
+counter.innerText = Math.floor(waterLevel);
+drawGauge(waterLevel);
 
+// Log 1 if above 70, else 0
+if (waterLevel > 70) {
+  console.log(1);
+} else {
+  console.log(0);
+}
+
+const nowMs = Date.now();       // milliseconds for throttling
+const nowSec = nowMs / 1000;    // seconds for regression
+
+if (nowMs - lastSent > 1500) {
+  fetch("http://localhost:3000/api/waterlevel", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ water_level: waterLevel })
+  }).catch(err => console.error("Failed to store water level:", err));
+
+  lastSent = nowMs; // update last sent time
+}
+waterData.push({ time: nowSec, level: waterLevel });
+if (waterData.length > 20) waterData.shift();
       // Store for regression
       const now=Date.now()/1000;
       waterData.push({time:now,level:waterLevel});
@@ -279,6 +301,9 @@ modeButton.addEventListener("click",()=>{
   }
 });
 </script>
-
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 </html>
