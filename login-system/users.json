@@ -1,0 +1,702 @@
+[
+  {
+    "username": "VivaanVerma1",
+    "password": "vivaan@001",
+    "email": "vivaan.verma1@gmail.com",
+    "mobile": "9876500001",
+    "appleId": "vivaan.verma1@apple.com"
+  },
+  {
+    "username": "AdityaPatel2",
+    "password": "aditya@002",
+    "email": "aditya.patel2@gmail.com",
+    "mobile": "9876500002",
+    "appleId": "aditya.patel2@apple.com"
+  },
+  {
+    "username": "VihaanReddy3",
+    "password": "vihaan@003",
+    "email": "vihaan.reddy3@gmail.com",
+    "mobile": "9876500003",
+    "appleId": "vihaan.reddy3@apple.com"
+  },
+  {
+    "username": "ArjunMehta4",
+    "password": "arjun@004",
+    "email": "arjun.mehta4@gmail.com",
+    "mobile": "9876500004",
+    "appleId": "arjun.mehta4@apple.com"
+  },
+  {
+    "username": "SaiNair5",
+    "password": "sai@005",
+    "email": "sai.nair5@gmail.com",
+    "mobile": "9876500005",
+    "appleId": "sai.nair5@apple.com"
+  },
+  {
+    "username": "ReyanshSingh6",
+    "password": "reyansh@006",
+    "email": "reyansh.singh6@gmail.com",
+    "mobile": "9876500006",
+    "appleId": "reyansh.singh6@apple.com"
+  },
+  {
+    "username": "KrishnaChopra7",
+    "password": "krishna@007",
+    "email": "krishna.chopra7@gmail.com",
+    "mobile": "9876500007",
+    "appleId": "krishna.chopra7@apple.com"
+  },
+  {
+    "username": "IshaanDas8",
+    "password": "ishaan@008",
+    "email": "ishaan.das8@gmail.com",
+    "mobile": "9876500008",
+    "appleId": "ishaan.das8@apple.com"
+  },
+  {
+    "username": "RudraIyer9",
+    "password": "rudra@009",
+    "email": "rudra.iyer9@gmail.com",
+    "mobile": "9876500009",
+    "appleId": "rudra.iyer9@apple.com"
+  },
+  {
+    "username": "AanyaKapoor10",
+    "password": "aanya@010",
+    "email": "aanya.kapoor10@gmail.com",
+    "mobile": "9876500010",
+    "appleId": "aanya.kapoor10@apple.com"
+  },
+  {
+    "username": "DiyaPillai11",
+    "password": "diya@011",
+    "email": "diya.pillai11@gmail.com",
+    "mobile": "9876500011",
+    "appleId": "diya.pillai11@apple.com"
+  },
+  {
+    "username": "AnayaBose12",
+    "password": "anaya@012",
+    "email": "anaya.bose12@gmail.com",
+    "mobile": "9876500012",
+    "appleId": "anaya.bose12@apple.com"
+  },
+  {
+    "username": "PariGhosh13",
+    "password": "pari@013",
+    "email": "pari.ghosh13@gmail.com",
+    "mobile": "9876500013",
+    "appleId": "pari.ghosh13@apple.com"
+  },
+  {
+    "username": "NavyaYadav14",
+    "password": "navya@014",
+    "email": "navya.yadav14@gmail.com",
+    "mobile": "9876500014",
+    "appleId": "navya.yadav14@apple.com"
+  },
+  {
+    "username": "MyraMishra15",
+    "password": "myra@015",
+    "email": "myra.mishra15@gmail.com",
+    "mobile": "9876500015",
+    "appleId": "myra.mishra15@apple.com"
+  },
+  {
+    "username": "IraRao16",
+    "password": "ira@016",
+    "email": "ira.rao16@gmail.com",
+    "mobile": "9876500016",
+    "appleId": "ira.rao16@apple.com"
+  },
+  {
+    "username": "SaraMenon17",
+    "password": "sara@017",
+    "email": "sara.menon17@gmail.com",
+    "mobile": "9876500017",
+    "appleId": "sara.menon17@apple.com"
+  },
+  {
+    "username": "MeeraGupta18",
+    "password": "meera@018",
+    "email": "meera.gupta18@gmail.com",
+    "mobile": "9876500018",
+    "appleId": "meera.gupta18@apple.com"
+  },
+  {
+    "username": "RiyaAgarwal19",
+    "password": "riya@019",
+    "email": "riya.agarwal19@gmail.com",
+    "mobile": "9876500019",
+    "appleId": "riya.agarwal19@apple.com"
+  },
+  {
+    "username": "KavyaSharma20",
+    "password": "kavya@020",
+    "email": "kavya.sharma20@gmail.com",
+    "mobile": "9876500020",
+    "appleId": "kavya.sharma20@apple.com"
+  },
+  {
+    "username": "SaanviVerma21",
+    "password": "saanvi@021",
+    "email": "saanvi.verma21@gmail.com",
+    "mobile": "9876500021",
+    "appleId": "saanvi.verma21@apple.com"
+  },
+  {
+    "username": "AadhyaPatel22",
+    "password": "aadhya@022",
+    "email": "aadhya.patel22@gmail.com",
+    "mobile": "9876500022",
+    "appleId": "aadhya.patel22@apple.com"
+  },
+  {
+    "username": "IshitaReddy23",
+    "password": "ishita@023",
+    "email": "ishita.reddy23@gmail.com",
+    "mobile": "9876500023",
+    "appleId": "ishita.reddy23@apple.com"
+  },
+  {
+    "username": "SnehaMehta24",
+    "password": "sneha@024",
+    "email": "sneha.mehta24@gmail.com",
+    "mobile": "9876500024",
+    "appleId": "sneha.mehta24@apple.com"
+  },
+  {
+    "username": "TanviNair25",
+    "password": "tanvi@025",
+    "email": "tanvi.nair25@gmail.com",
+    "mobile": "9876500025",
+    "appleId": "tanvi.nair25@apple.com"
+  },
+  {
+    "username": "NishaSingh26",
+    "password": "nisha@026",
+    "email": "nisha.singh26@gmail.com",
+    "mobile": "9876500026",
+    "appleId": "nisha.singh26@apple.com"
+  },
+  {
+    "username": "PoojaChopra27",
+    "password": "pooja@027",
+    "email": "pooja.chopra27@gmail.com",
+    "mobile": "9876500027",
+    "appleId": "pooja.chopra27@apple.com"
+  },
+  {
+    "username": "RitikaDas28",
+    "password": "ritika@028",
+    "email": "ritika.das28@gmail.com",
+    "mobile": "9876500028",
+    "appleId": "ritika.das28@apple.com"
+  },
+  {
+    "username": "SimranIyer29",
+    "password": "simran@029",
+    "email": "simran.iyer29@gmail.com",
+    "mobile": "9876500029",
+    "appleId": "simran.iyer29@apple.com"
+  },
+  {
+    "username": "AaravKapoor30",
+    "password": "aarav@030",
+    "email": "aarav.kapoor30@gmail.com",
+    "mobile": "9876500030",
+    "appleId": "aarav.kapoor30@apple.com"
+  },
+  {
+    "username": "VivaanPillai31",
+    "password": "vivaan@031",
+    "email": "vivaan.pillai31@gmail.com",
+    "mobile": "9876500031",
+    "appleId": "vivaan.pillai31@apple.com"
+  },
+  {
+    "username": "AdityaBose32",
+    "password": "aditya@032",
+    "email": "aditya.bose32@gmail.com",
+    "mobile": "9876500032",
+    "appleId": "aditya.bose32@apple.com"
+  },
+  {
+    "username": "VihaanGhosh33",
+    "password": "vihaan@033",
+    "email": "vihaan.ghosh33@gmail.com",
+    "mobile": "9876500033",
+    "appleId": "vihaan.ghosh33@apple.com"
+  },
+  {
+    "username": "ArjunYadav34",
+    "password": "arjun@034",
+    "email": "arjun.yadav34@gmail.com",
+    "mobile": "9876500034",
+    "appleId": "arjun.yadav34@apple.com"
+  },
+  {
+    "username": "SaiMishra35",
+    "password": "sai@035",
+    "email": "sai.mishra35@gmail.com",
+    "mobile": "9876500035",
+    "appleId": "sai.mishra35@apple.com"
+  },
+  {
+    "username": "ReyanshRao36",
+    "password": "reyansh@036",
+    "email": "reyansh.rao36@gmail.com",
+    "mobile": "9876500036",
+    "appleId": "reyansh.rao36@apple.com"
+  },
+  {
+    "username": "KrishnaMenon37",
+    "password": "krishna@037",
+    "email": "krishna.menon37@gmail.com",
+    "mobile": "9876500037",
+    "appleId": "krishna.menon37@apple.com"
+  },
+  {
+    "username": "IshaanGupta38",
+    "password": "ishaan@038",
+    "email": "ishaan.gupta38@gmail.com",
+    "mobile": "9876500038",
+    "appleId": "ishaan.gupta38@apple.com"
+  },
+  {
+    "username": "RudraAgarwal39",
+    "password": "rudra@039",
+    "email": "rudra.agarwal39@gmail.com",
+    "mobile": "9876500039",
+    "appleId": "rudra.agarwal39@apple.com"
+  },
+  {
+    "username": "AanyaSharma40",
+    "password": "aanya@040",
+    "email": "aanya.sharma40@gmail.com",
+    "mobile": "9876500040",
+    "appleId": "aanya.sharma40@apple.com"
+  },
+  {
+    "username": "DiyaVerma41",
+    "password": "diya@041",
+    "email": "diya.verma41@gmail.com",
+    "mobile": "9876500041",
+    "appleId": "diya.verma41@apple.com"
+  },
+  {
+    "username": "AnayaPatel42",
+    "password": "anaya@042",
+    "email": "anaya.patel42@gmail.com",
+    "mobile": "9876500042",
+    "appleId": "anaya.patel42@apple.com"
+  },
+  {
+    "username": "PariReddy43",
+    "password": "pari@043",
+    "email": "pari.reddy43@gmail.com",
+    "mobile": "9876500043",
+    "appleId": "pari.reddy43@apple.com"
+  },
+  {
+    "username": "NavyaMehta44",
+    "password": "navya@044",
+    "email": "navya.mehta44@gmail.com",
+    "mobile": "9876500044",
+    "appleId": "navya.mehta44@apple.com"
+  },
+  {
+    "username": "MyraNair45",
+    "password": "myra@045",
+    "email": "myra.nair45@gmail.com",
+    "mobile": "9876500045",
+    "appleId": "myra.nair45@apple.com"
+  },
+  {
+    "username": "IraSingh46",
+    "password": "ira@046",
+    "email": "ira.singh46@gmail.com",
+    "mobile": "9876500046",
+    "appleId": "ira.singh46@apple.com"
+  },
+  {
+    "username": "SaraChopra47",
+    "password": "sara@047",
+    "email": "sara.chopra47@gmail.com",
+    "mobile": "9876500047",
+    "appleId": "sara.chopra47@apple.com"
+  },
+  {
+    "username": "MeeraDas48",
+    "password": "meera@048",
+    "email": "meera.das48@gmail.com",
+    "mobile": "9876500048",
+    "appleId": "meera.das48@apple.com"
+  },
+  {
+    "username": "RiyaIyer49",
+    "password": "riya@049",
+    "email": "riya.iyer49@gmail.com",
+    "mobile": "9876500049",
+    "appleId": "riya.iyer49@apple.com"
+  },
+  {
+    "username": "KavyaKapoor50",
+    "password": "kavya@050",
+    "email": "kavya.kapoor50@gmail.com",
+    "mobile": "9876500050",
+    "appleId": "kavya.kapoor50@apple.com"
+  },
+  {
+    "username": "SaanviPillai51",
+    "password": "saanvi@051",
+    "email": "saanvi.pillai51@gmail.com",
+    "mobile": "9876500051",
+    "appleId": "saanvi.pillai51@apple.com"
+  },
+  {
+    "username": "AadhyaBose52",
+    "password": "aadhya@052",
+    "email": "aadhya.bose52@gmail.com",
+    "mobile": "9876500052",
+    "appleId": "aadhya.bose52@apple.com"
+  },
+  {
+    "username": "IshitaGhosh53",
+    "password": "ishita@053",
+    "email": "ishita.ghosh53@gmail.com",
+    "mobile": "9876500053",
+    "appleId": "ishita.ghosh53@apple.com"
+  },
+  {
+    "username": "SnehaYadav54",
+    "password": "sneha@054",
+    "email": "sneha.yadav54@gmail.com",
+    "mobile": "9876500054",
+    "appleId": "sneha.yadav54@apple.com"
+  },
+  {
+    "username": "TanviMishra55",
+    "password": "tanvi@055",
+    "email": "tanvi.mishra55@gmail.com",
+    "mobile": "9876500055",
+    "appleId": "tanvi.mishra55@apple.com"
+  },
+  {
+    "username": "NishaRao56",
+    "password": "nisha@056",
+    "email": "nisha.rao56@gmail.com",
+    "mobile": "9876500056",
+    "appleId": "nisha.rao56@apple.com"
+  },
+  {
+    "username": "PoojaMenon57",
+    "password": "pooja@057",
+    "email": "pooja.menon57@gmail.com",
+    "mobile": "9876500057",
+    "appleId": "pooja.menon57@apple.com"
+  },
+  {
+    "username": "RitikaGupta58",
+    "password": "ritika@058",
+    "email": "ritika.gupta58@gmail.com",
+    "mobile": "9876500058",
+    "appleId": "ritika.gupta58@apple.com"
+  },
+  {
+    "username": "SimranAgarwal59",
+    "password": "simran@059",
+    "email": "simran.agarwal59@gmail.com",
+    "mobile": "9876500059",
+    "appleId": "simran.agarwal59@apple.com"
+  },
+  {
+    "username": "AaravSharma60",
+    "password": "aarav@060",
+    "email": "aarav.sharma60@gmail.com",
+    "mobile": "9876500060",
+    "appleId": "aarav.sharma60@apple.com"
+  },
+  {
+    "username": "VivaanVerma61",
+    "password": "vivaan@061",
+    "email": "vivaan.verma61@gmail.com",
+    "mobile": "9876500061",
+    "appleId": "vivaan.verma61@apple.com"
+  },
+  {
+    "username": "AdityaPatel62",
+    "password": "aditya@062",
+    "email": "aditya.patel62@gmail.com",
+    "mobile": "9876500062",
+    "appleId": "aditya.patel62@apple.com"
+  },
+  {
+    "username": "VihaanReddy63",
+    "password": "vihaan@063",
+    "email": "vihaan.reddy63@gmail.com",
+    "mobile": "9876500063",
+    "appleId": "vihaan.reddy63@apple.com"
+  },
+  {
+    "username": "ArjunMehta64",
+    "password": "arjun@064",
+    "email": "arjun.mehta64@gmail.com",
+    "mobile": "9876500064",
+    "appleId": "arjun.mehta64@apple.com"
+  },
+  {
+    "username": "SaiNair65",
+    "password": "sai@065",
+    "email": "sai.nair65@gmail.com",
+    "mobile": "9876500065",
+    "appleId": "sai.nair65@apple.com"
+  },
+  {
+    "username": "ReyanshSingh66",
+    "password": "reyansh@066",
+    "email": "reyansh.singh66@gmail.com",
+    "mobile": "9876500066",
+    "appleId": "reyansh.singh66@apple.com"
+  },
+  {
+    "username": "KrishnaChopra67",
+    "password": "krishna@067",
+    "email": "krishna.chopra67@gmail.com",
+    "mobile": "9876500067",
+    "appleId": "krishna.chopra67@apple.com"
+  },
+  {
+    "username": "IshaanDas68",
+    "password": "ishaan@068",
+    "email": "ishaan.das68@gmail.com",
+    "mobile": "9876500068",
+    "appleId": "ishaan.das68@apple.com"
+  },
+  {
+    "username": "RudraIyer69",
+    "password": "rudra@069",
+    "email": "rudra.iyer69@gmail.com",
+    "mobile": "9876500069",
+    "appleId": "rudra.iyer69@apple.com"
+  },
+  {
+    "username": "AanyaKapoor70",
+    "password": "aanya@070",
+    "email": "aanya.kapoor70@gmail.com",
+    "mobile": "9876500070",
+    "appleId": "aanya.kapoor70@apple.com"
+  },
+  {
+    "username": "DiyaPillai71",
+    "password": "diya@071",
+    "email": "diya.pillai71@gmail.com",
+    "mobile": "9876500071",
+    "appleId": "diya.pillai71@apple.com"
+  },
+  {
+    "username": "AnayaBose72",
+    "password": "anaya@072",
+    "email": "anaya.bose72@gmail.com",
+    "mobile": "9876500072",
+    "appleId": "anaya.bose72@apple.com"
+  },
+  {
+    "username": "PariGhosh73",
+    "password": "pari@073",
+    "email": "pari.ghosh73@gmail.com",
+    "mobile": "9876500073",
+    "appleId": "pari.ghosh73@apple.com"
+  },
+  {
+    "username": "NavyaYadav74",
+    "password": "navya@074",
+    "email": "navya.yadav74@gmail.com",
+    "mobile": "9876500074",
+    "appleId": "navya.yadav74@apple.com"
+  },
+  {
+    "username": "MyraMishra75",
+    "password": "myra@075",
+    "email": "myra.mishra75@gmail.com",
+    "mobile": "9876500075",
+    "appleId": "myra.mishra75@apple.com"
+  },
+  {
+    "username": "IraRao76",
+    "password": "ira@076",
+    "email": "ira.rao76@gmail.com",
+    "mobile": "9876500076",
+    "appleId": "ira.rao76@apple.com"
+  },
+  {
+    "username": "SaraMenon77",
+    "password": "sara@077",
+    "email": "sara.menon77@gmail.com",
+    "mobile": "9876500077",
+    "appleId": "sara.menon77@apple.com"
+  },
+  {
+    "username": "MeeraGupta78",
+    "password": "meera@078",
+    "email": "meera.gupta78@gmail.com",
+    "mobile": "9876500078",
+    "appleId": "meera.gupta78@apple.com"
+  },
+  {
+    "username": "RiyaAgarwal79",
+    "password": "riya@079",
+    "email": "riya.agarwal79@gmail.com",
+    "mobile": "9876500079",
+    "appleId": "riya.agarwal79@apple.com"
+  },
+  {
+    "username": "KavyaSharma80",
+    "password": "kavya@080",
+    "email": "kavya.sharma80@gmail.com",
+    "mobile": "9876500080",
+    "appleId": "kavya.sharma80@apple.com"
+  },
+  {
+    "username": "SaanviVerma81",
+    "password": "saanvi@081",
+    "email": "saanvi.verma81@gmail.com",
+    "mobile": "9876500081",
+    "appleId": "saanvi.verma81@apple.com"
+  },
+  {
+    "username": "AadhyaPatel82",
+    "password": "aadhya@082",
+    "email": "aadhya.patel82@gmail.com",
+    "mobile": "9876500082",
+    "appleId": "aadhya.patel82@apple.com"
+  },
+  {
+    "username": "IshitaReddy83",
+    "password": "ishita@083",
+    "email": "ishita.reddy83@gmail.com",
+    "mobile": "9876500083",
+    "appleId": "ishita.reddy83@apple.com"
+  },
+  {
+    "username": "SnehaMehta84",
+    "password": "sneha@084",
+    "email": "sneha.mehta84@gmail.com",
+    "mobile": "9876500084",
+    "appleId": "sneha.mehta84@apple.com"
+  },
+  {
+    "username": "TanviNair85",
+    "password": "tanvi@085",
+    "email": "tanvi.nair85@gmail.com",
+    "mobile": "9876500085",
+    "appleId": "tanvi.nair85@apple.com"
+  },
+  {
+    "username": "NishaSingh86",
+    "password": "nisha@086",
+    "email": "nisha.singh86@gmail.com",
+    "mobile": "9876500086",
+    "appleId": "nisha.singh86@apple.com"
+  },
+  {
+    "username": "PoojaChopra87",
+    "password": "pooja@087",
+    "email": "pooja.chopra87@gmail.com",
+    "mobile": "9876500087",
+    "appleId": "pooja.chopra87@apple.com"
+  },
+  {
+    "username": "RitikaDas88",
+    "password": "ritika@088",
+    "email": "ritika.das88@gmail.com",
+    "mobile": "9876500088",
+    "appleId": "ritika.das88@apple.com"
+  },
+  {
+    "username": "SimranIyer89",
+    "password": "simran@089",
+    "email": "simran.iyer89@gmail.com",
+    "mobile": "9876500089",
+    "appleId": "simran.iyer89@apple.com"
+  },
+  {
+    "username": "AaravKapoor90",
+    "password": "aarav@090",
+    "email": "aarav.kapoor90@gmail.com",
+    "mobile": "9876500090",
+    "appleId": "aarav.kapoor90@apple.com"
+  },
+  {
+    "username": "VivaanPillai91",
+    "password": "vivaan@091",
+    "email": "vivaan.pillai91@gmail.com",
+    "mobile": "9876500091",
+    "appleId": "vivaan.pillai91@apple.com"
+  },
+  {
+    "username": "AdityaBose92",
+    "password": "aditya@092",
+    "email": "aditya.bose92@gmail.com",
+    "mobile": "9876500092",
+    "appleId": "aditya.bose92@apple.com"
+  },
+  {
+    "username": "VihaanGhosh93",
+    "password": "vihaan@093",
+    "email": "vihaan.ghosh93@gmail.com",
+    "mobile": "9876500093",
+    "appleId": "vihaan.ghosh93@apple.com"
+  },
+  {
+    "username": "ArjunYadav94",
+    "password": "arjun@094",
+    "email": "arjun.yadav94@gmail.com",
+    "mobile": "9876500094",
+    "appleId": "arjun.yadav94@apple.com"
+  },
+  {
+    "username": "SaiMishra95",
+    "password": "sai@095",
+    "email": "sai.mishra95@gmail.com",
+    "mobile": "9876500095",
+    "appleId": "sai.mishra95@apple.com"
+  },
+  {
+    "username": "ReyanshRao96",
+    "password": "reyansh@096",
+    "email": "reyansh.rao96@gmail.com",
+    "mobile": "9876500096",
+    "appleId": "reyansh.rao96@apple.com"
+  },
+  {
+    "username": "KrishnaMenon97",
+    "password": "krishna@097",
+    "email": "krishna.menon97@gmail.com",
+    "mobile": "9876500097",
+    "appleId": "krishna.menon97@apple.com"
+  },
+  {
+    "username": "IshaanGupta98",
+    "password": "ishaan@098",
+    "email": "ishaan.gupta98@gmail.com",
+    "mobile": "9876500098",
+    "appleId": "ishaan.gupta98@apple.com"
+  },
+  {
+    "username": "RudraAgarwal99",
+    "password": "rudra@099",
+    "email": "rudra.agarwal99@gmail.com",
+    "mobile": "9876500099",
+    "appleId": "rudra.agarwal99@apple.com"
+  },
+  {
+    "username": "AanyaSharma100",
+    "password": "aanya@100",
+    "email": "aanya.sharma100@gmail.com",
+    "mobile": "9876500100",
+    "appleId": "aanya.sharma100@apple.com"
+  }
+]

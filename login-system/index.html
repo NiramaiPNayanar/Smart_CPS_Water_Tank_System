@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Main Login</title>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.61/build/spline-viewer.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #f1f1f1;
+  }
+
+  spline-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    z-index: -1;
+  }
+
+  .container {
+    background: rgba(43, 43, 43, 0.95);
+    padding: 40px;
+    border-radius: 16px;
+    width: 360px;
+    text-align: center;
+    box-shadow: 0px 8px 24px rgba(0,0,0,0.6);
+  }
+
+  h2 { margin-bottom: 20px; color: #fff; }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #555;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    background: #3b3b3b;
+    color: #fff;
+  }
+
+  input:focus {
+    border-color: #9b7bff;
+    box-shadow: 0 0 6px rgba(155,123,255,.6);
+  }
+
+  .password-field { position: relative; }
+
+  .password-field i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: #9b7bff;
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover { background: #7c5ad5; }
+
+  .divider { margin: 20px 0; font-size: 14px; color: #ccc; }
+
+  .logos {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 15px 0;
+  }
+
+  .logos a {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: #3b3b3b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+  }
+
+  .logos a img { width: 30px; height: 30px; }
+
+  .logos a:hover {
+    transform: scale(1.1);
+    background: #9b7bff;
+    box-shadow: 0 6px 18px rgba(155,123,255,0.5);
+  }
+
+  p { margin-top: 20px; font-size: 14px; color: #ccc; }
+
+  p a { color: #9b7bff; text-decoration: none; font-weight: 600; }
+
+  p a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<spline-viewer url="https://prod.spline.design/z8GxybXBhb4Ia2Ts/scene.splinecode"></spline-viewer>
+
+<div class="container">
+  <h2>Login to continue</h2>
+  <form id="loginForm">
+    <input type="text" name="username" placeholder="Username" required>
+    <div class="password-field">
+      <input type="password" name="password" id="mainPass" placeholder="Password" required>
+      <i class="fas fa-eye" id="mainIcon" onclick="togglePassword('mainPass','mainIcon')"></i>
+    </div>
+    <button type="submit">Login</button>
+  </form>
+
+  <div class="divider">Or continue with</div>
+  <div class="logos">
+    <a href="login_apple.html" title="Apple"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple"></a>
+    <a href="login_email.html" title="Gmail"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Gmail"></a>
+    <a href="login_mobile.html" title="Mobile"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Mobile_icon.svg" alt="Mobile"></a>
+  </div>
+
+  <p>Don’t have an account? <a href="signup.html">Sign Up</a></p>
+</div>
+
+<script>
+function togglePassword(id, iconId){
+  let input = document.getElementById(id);
+  let icon = document.getElementById(iconId);
+  if(input.type === "password"){
+    input.type = "text";
+    icon.classList.replace("fa-eye","fa-eye-slash");
+  } else {
+    input.type = "password";
+    icon.classList.replace("fa-eye-slash","fa-eye");
+  }
+}
+
+document.getElementById("loginForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  const username = e.target.username.value;
+  const password = e.target.password.value;
+
+  try {
+    const res = await fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await res.json();
+
+    if(res.status === 200){
+      alert(data.message);
+      window.location.href = "main.html"; // redirect on success
+    } else {
+      alert(data.message); // invalid credentials
+    }
+  } catch(err){
+    console.error(err);
+    alert("❌ Server error. Try again later.");
+  }
+});
+</script>
+</body>
+</html>
