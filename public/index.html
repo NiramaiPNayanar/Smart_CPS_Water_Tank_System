@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Login</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.61/build/spline-viewer.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    /* Full-screen Spline background */
+    spline-viewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 110%;
+      z-index: -1; /* behind everything */
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      width: 360px;
+      text-align: center;
+      box-shadow: 0px 8px 24px rgba(0,0,0,0.2);
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+    input:focus {
+      border-color: #6c63ff;
+      box-shadow: 0 0 6px rgba(108,99,255,.5);
+    }
+    .password-field {
+      position: relative;
+    }
+    .password-field i {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #555;
+    }
+        spline-viewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 110%;
+      z-index: -1; /* behind everything */
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #6c63ff;
+      border: none;
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #5848d5;
+    }
+    .divider {
+      margin: 20px 0;
+      font-size: 14px;
+      color: #666;
+    }
+    .logos {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 15px 0;
+    }
+    .logos a {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      color: #333;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .logos a:hover {
+      transform: scale(1.1);
+      background: #6c63ff;
+      color: white;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+    p {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #444;
+    }
+    p a {
+      color: #6c63ff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    p a:hover {
+      text-decoration: underline;
+    }
+
+   /* Dark Mode */
+body.dark {
+  background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+}
+
+body.dark .container {
+  background: #2b2b2b;
+  color: #fff; /* all default text white */
+}
+
+/* Headings */
+body.dark h2 {
+  color: #fff;
+}
+
+/* Paragraphs */
+body.dark p {
+  color: #fff;
+}
+
+/* Links inside container */
+body.dark p a {
+  color: #9b7bff;
+}
+
+/* Inputs */
+body.dark input {
+  background: #3b3b3b;
+  border: 1px solid #555;
+  color: #fff; /* input text white */
+}
+
+body.dark input:focus {
+  border-color: #9b7bff;
+  box-shadow: 0 0 6px rgba(155,123,255,.6);
+}
+
+/* Buttons */
+body.dark button {
+  background: #9b7bff;
+}
+
+body.dark button:hover {
+  background: #7c5ad5;
+}
+body.dark .divider {
+  color: #fff;
+}
+
+/* Logos */
+body.dark .logos a {
+  background: #3b3b3b;
+  color: #fff;
+}
+
+body.dark .logos a:hover {
+  background: #9b7bff;
+  color: #fff;
+}
+
+  </style>
+
+</head>
+<body>
+  <!-- Spline Background -->
+  <spline-viewer url="https://prod.spline.design/z8GxybXBhb4Ia2Ts/scene.splinecode"></spline-viewer>
+
+  <!-- Your original login container -->
+  <div class="container">
+    <h2>Main Login</h2>
+   <form id="mainLoginForm">
+  <input type="text" placeholder="Username" required name="username">
+  <div class="password-field">
+    <input type="password" id="mainPass" placeholder="Password" required name="password">
+    <i class="fas fa-eye" id="mainIcon" onclick="togglePassword('mainPass','mainIcon')"></i>
+  </div>
+  <button type="submit">Login</button>
+</form>
+<p id="message" style="color:red;"></p>
+
+    <div class="divider">Or continue with</div>
+
+    <div class="logos">
+      <a href="login_apple.html" title="Apple">
+  <img src="apple (1).png" alt="Apple Login" style="width:60px; height:60px; border-radius:50%;">
+</a>
+<a href="login_email.html" title="Gmail">
+  <img src="gmail.png" alt="Gmail Login" style="width:60px; height:60px; border-radius:50%;">
+</a>
+<a href="login_mobile.html" title="Mobile">
+  <img src="phone.png" alt="Mobile Login" style="width:60px; height:60px; border-radius:50%;">
+</a>
+</div>
+
+    <p>Don’t have an account? <a href="signup.html">Sign Up</a></p>
+    <button type="button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+  </div>
+
+ <script>
+document.getElementById("mainLoginForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const username = e.target.username.value;
+  const password = e.target.password.value;
+  const msg = document.getElementById("message");
+  msg.textContent = "";
+
+  try {
+    const res = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+
+    if(res.status === 200){
+      // ✅ Redirect to main.html after successful login
+      window.location.href = "main.html";
+    } else {
+      msg.textContent = data.message;
+    }
+  } catch(err){
+    msg.textContent = "❌ Server error. Try again later.";
+  }
+});
+function togglePassword(inputId, iconId){
+  const input = document.getElementById(inputId);
+  const icon = document.getElementById(iconId);
+  if(input.type === "password"){
+    input.type = "text";
+    icon.classList.remove("fa-eye");
+    icon.classList.add("fa-eye-slash");
+  } else {
+    input.type = "password";
+    icon.classList.remove("fa-eye-slash");
+    icon.classList.add("fa-eye");
+  }
+}
+
+// Dark mode toggle
+function toggleDarkMode(){
+  document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

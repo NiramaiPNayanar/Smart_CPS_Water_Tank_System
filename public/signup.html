@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup</title>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.61/build/spline-viewer.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  body {font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#1f1f1f,#2c2c2c);display:flex;justify-content:center;align-items:center;height:100vh;margin:0;color:#f1f1f1;}
+  .container {background: rgba(43,43,43,0.95);padding:40px;border-radius:16px;width:360px;text-align:center;box-shadow:0px 8px 24px rgba(0,0,0,0.6);}
+  h2 {margin-bottom:20px;color:#fff;}
+  input {width:100%;padding:12px;margin:12px 0;border:1px solid #555;border-radius:8px;outline:none;font-size:14px;background:#3b3b3b;color:#fff;}
+  input:focus {border-color:#9b7bff;box-shadow:0 0 6px rgba(155,123,255,.6);}
+  .password-field {position:relative;}
+  .password-field i {position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:#aaa;}
+  button {width:100%;padding:12px;margin-top:10px;background:#9b7bff;border:none;color:white;font-weight:600;border-radius:8px;cursor:pointer;transition:0.3s;}
+  button:hover {background:#7c5ad5;}
+  p {margin-top:20px;font-size:14px;color:#ccc;}
+  p a {color:#9b7bff;text-decoration:none;font-weight:600;}
+  p a:hover {text-decoration:underline;}
+  spline-viewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 110%;
+      z-index: -1; /* behind everything */
+    }
+</style>
+</head>
+<body>
+   <spline-viewer url="https://prod.spline.design/z8GxybXBhb4Ia2Ts/scene.splinecode"></spline-viewer>
+<div class="container">
+  <h2>Sign Up</h2>
+  <form id="signupForm">
+    <input type="text" name="username" placeholder="Choose Username" required>
+    <div class="password-field">
+      <input type="password" name="password" id="signupPass" placeholder="Create Password" required>
+      <i class="fas fa-eye" id="signupIcon" onclick="togglePassword('signupPass','signupIcon')"></i>
+    </div>
+    <input type="text" name="contact" placeholder="Mobile / Gmail / Apple ID" required>
+    <button type="submit">Sign Up</button>
+  </form>
+  <p>Already have an account? <a href="index.html">Login</a></p>
+</div>
+
+<p id="message"></p>
+
+<script>
+function togglePassword(id, iconId){
+  const input = document.getElementById(id);
+  const icon = document.getElementById(iconId);
+  if(input.type === "password"){
+    input.type = "text";
+    icon.classList.replace("fa-eye","fa-eye-slash");
+  } else {
+    input.type = "password";
+    icon.classList.replace("fa-eye-slash","fa-eye");
+  }
+}
+
+// Simple validation functions
+function isValidUsername(username){
+  return username.length >= 3;
+}
+function isValidPassword(password){
+  return password.length >= 6 && /\d/.test(password);
+}
+function isValidContact(contact){
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const mobileRegex = /^[0-9]{10}$/;
+  const appleRegex = /^[^\s@]+@apple\.com$/;
+  return emailRegex.test(contact) || mobileRegex.test(contact) || appleRegex.test(contact);
+}
+
+document.getElementById("signupForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const username = e.target.username.value.trim();
+  const password = e.target.password.value.trim();
+  const contact = e.target.contact.value.trim();
+  const msg = document.getElementById("message");
+  msg.textContent = "";
+
+  // ---------------- VALIDATION ----------------
+  if(!isValidUsername(username)){
+    msg.textContent = "❌ Username must be at least 3 characters";
+    msg.style.color = "red";
+    return;
+  }
+  if(!isValidPassword(password)){
+    msg.textContent = "❌ Password must be at least 6 characters and contain a number";
+    msg.style.color = "red";
+    return;
+  }
+  if(!isValidContact(contact)){
+    msg.textContent = "❌ Enter a valid email, mobile number, or Apple ID";
+    msg.style.color = "red";
+    return;
+  }
+
+  // ---------------- SUBMIT ----------------
+  try {
+    const res = await fetch("http://localhost:3000/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password, contact })
+    });
+    const data = await res.json();
+
+    if(res.status === 200){
+      msg.textContent = data.message;
+      msg.style.color = "green";
+      setTimeout(()=>window.location.href="index.html", 1500);
+    } else {
+      msg.textContent = data.message;
+      msg.style.color = "red";
+    }
+  } catch(err){
+    msg.textContent = "❌ Server error. Try again later.";
+    msg.style.color = "red";
+  }
+});
+</script>
+</body>
+</html>

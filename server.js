@@ -1,64 +1,68 @@
-// Load env variables
 require('dotenv').config({ path: './mail.env' });
 
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
+const path = require('path');
 
 const app = express();
 
-// Middleware
+// -------------------- MIDDLEWARE --------------------
 app.use(cors());
-app.use(express.json()); // built-in JSON parser
+app.use(express.json());
 app.use(bodyParser.json());
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/waterdb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log("✅ MongoDB Connected"))
-.catch(err => console.error("❌ MongoDB connection error:", err));
+// Serve static files from public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
-/* -------------------- User Schema -------------------- */
-const UserSchema = new mongoose.Schema({
+// -------------------- CONNECT TO MONGODB --------------------
+mongoose.connect('mongodb://127.0.0.1:27017/user')
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch(err => console.error("❌ MongoDB connection error:", err));
+
+// -------------------- USER MODEL --------------------
+const userSchema = new mongoose.Schema({
   username: { type: String, unique: true },
   password: String,
-  contact: String
+  email: String,
+  mobile: String,
+  appleId: String
 });
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', userSchema);
 
-/* -------------------- Water Schema -------------------- */
+// -------------------- WATER LEVEL MODEL --------------------
 const waterSchema = new mongoose.Schema({
   water_level: Number,
   timestamp: { type: Date, default: Date.now }
 });
 const Water = mongoose.model('Water', waterSchema);
 
-/* -------------------- Email Transporter -------------------- */
+// -------------------- EMAIL TRANSPORTER --------------------
 const transporter = nodemailer.createTransport({
   service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
+  auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS }
 });
 
-/* -------------------- Auth Routes -------------------- */
-// SIGNUP
+// -------------------- SIGNUP --------------------
 app.post("/signup", async (req, res) => {
   const { username, password, contact } = req.body;
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, password: hashedPassword, contact });
+    const method = contact.includes('@') ? 'gmail' : (isNaN(contact) ? 'apple' : 'mobile');
+
+    const newUser = new User({
+      username,
+      password, // plain text
+      email: method === 'gmail' ? contact : "",
+      mobile: method === 'mobile' ? contact : "",
+      appleId: method === 'apple' ? contact : ""
+    });
+
     await newUser.save();
 
-    // send email if contact is an email
-    if (contact && contact.includes('@')) {
+    if (method === 'gmail') {
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: contact,
@@ -77,16 +81,25 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-// LOGIN
+// -------------------- LOGIN --------------------
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({
+      $or: [
+        { username: username },
+        { email: username },
+        { mobile: username },
+        { appleId: username }
+      ]
+    });
+
     if (!user) return res.status(401).json({ message: "❌ Invalid credentials" });
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ message: "❌ Invalid credentials" });
+    if (user.password !== password) {
+      return res.status(401).json({ message: "❌ Invalid credentials" });
+    }
 
     res.status(200).json({ message: "✅ Login successful!" });
   } catch (err) {
@@ -113,10 +126,45 @@ app.post('/api/waterlevel', async (req, res) => {
 
 // GET recent water levels
 app.get('/api/waterlevel', async (req, res) => {
-  const data = await Water.find().sort({ timestamp: -1 }).limit(20);
-  res.json(data);
+  try {
+    const data = await Water.find().sort({ timestamp: -1 }).limit(20);
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
 });
 
-/* -------------------- Start Server -------------------- */
+// -------------------- WATER ACTIVITY MODEL --------------------
+const waterActivitySchema = new mongoose.Schema({
+  day: String,
+  data: [Number]
+});
+// WATER ACTIVITY MODEL
+const WaterActivity = mongoose.model('WaterActivity', waterActivitySchema, 'waterlevel_activity_data');
+
+// ROUTE
+app.get('/api/waterlevel_activity_data', async (req, res) => {
+  try {
+    const activity = await WaterActivity.find(); // get all days
+    res.json(activity);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+
+// -------------------- CATCH-ALL ROUTE FOR HTML --------------------
+app.get("/:page", (req, res) => {
+  const page = req.params.page;
+  const filePath = path.join(__dirname, "public", `${page}.html`);
+  res.sendFile(filePath, err => {
+    if (err) res.status(404).send("❌ Page not found");
+  });
+});
+
+
+// -------------------- START SERVER --------------------
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
