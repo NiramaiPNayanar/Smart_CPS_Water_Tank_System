@@ -37,7 +37,10 @@ const waterSchema = new mongoose.Schema({
   water_level: Number,
   timestamp: { type: Date, default: Date.now }
 });
-const Water = mongoose.model('Water', waterSchema);
+
+// Explicitly use "waterlevel" collection inside "user" database
+const Water = mongoose.model('Water', waterSchema, 'waterlevel');
+
 
 // -------------------- EMAIL TRANSPORTER --------------------
 const transporter = nodemailer.createTransport({
