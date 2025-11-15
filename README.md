@@ -29,8 +29,8 @@ All content in this repository reflects the prototype phase only and is not inte
 
 - Microcontrollers: Arduino or ESP-based boards  
 - Communication: WiFi or MQTT (prototype)  
-- Data Processing: Basic calibration and filtering on the device  
-- Visualization: Simple interface mockups for monitoring  
+- Data Processing: Basic calibration and filtering on the device stored in a databse
+- Visualization: Simple interface mockups for monitoring and 3D models for visualizations 
 - Architecture: Cyber-Physical Systems workflow (perception → transmission → computation → actuation)
 
 ## Repository Structure
