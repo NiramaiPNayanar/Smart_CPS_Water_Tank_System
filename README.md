@@ -5,7 +5,7 @@ The initial development was done as part of an early product ideation activity i
 Note: The system may have evolved significantly after my involvement.
 
 ## Overview
-
+ 
 The Smart CPS Water Tank System was intended to test the feasibility of:
 
 - Real-time monitoring of water tank levels  
