@@ -4,7 +4,7 @@ This repository contains the early-stage prototype of a Cyber-Physical System (C
 The initial development was done as part of an early product ideation activity in collaboration with the team at Eshwar Tanks (https://www.eshwartanks.com/).  
 Note: The system may have evolved significantly after my involvement.
 
-## Overview
+## Overview 
  
 The Smart CPS Water Tank System was intended to test the feasibility of:
 
