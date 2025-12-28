@@ -63,8 +63,4 @@ Example structure (prototype level):
   - This repository exists for documentation, experimentation, and learning purposes only.
   - Nothing in this repository should be interpreted as reflecting the final product decisions of any company or team.
 
-## License – BSD 3-Clause License
-  This license ensures:
-  - You are not liable for any usage, modifications, or deployments made by others.
-  - Your name cannot be used to endorse or promote derivative products.
-  - The prototype remains open for learning and reference.
+
